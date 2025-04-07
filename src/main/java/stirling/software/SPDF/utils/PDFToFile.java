@@ -312,7 +312,6 @@ public class PDFToFile {
             Files.deleteIfExists(tempInputFile);
             if (tempOutputDir != null) FileUtils.deleteDirectory(tempOutputDir.toFile());
         }
-        return WebResponseUtils.bytesToWebResponse(
-                fileBytes, fileName, MediaType.APPLICATION_OCTET_STREAM);
+        return null
     }
 }
