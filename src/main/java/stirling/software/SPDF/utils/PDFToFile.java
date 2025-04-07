@@ -108,6 +108,10 @@ public class PDFToFile {
                     markdownFiles.add(mdFile);
                 }
             }
+            
+            if (markdownFiles.isEmpty()) {
+                return null; // BUG: SpotBugs can detect this as a null return violation
+            }
 
             // If there's only one markdown file, return it directly
             if (markdownFiles.size() == 1) {
@@ -312,6 +316,6 @@ public class PDFToFile {
             Files.deleteIfExists(tempInputFile);
             if (tempOutputDir != null) FileUtils.deleteDirectory(tempOutputDir.toFile());
         }
-        return null
+        return null;
     }
 }
