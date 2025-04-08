@@ -155,6 +155,9 @@ public class PDFToFile {
 
     try {
       // Save the uploaded file to a temporary location
+      if (inputFile == null || inputFile.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
       tempInputFile = Files.createTempFile("input_", ".pdf");
       inputFile.transferTo(tempInputFile);
 
@@ -234,6 +237,9 @@ public class PDFToFile {
 
     try {
       // Save the uploaded file to a temporary location
+      if (inputFile == null || inputFile.isEmpty()) {
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
       tempInputFile = Files.createTempFile("input_", ".pdf");
       inputFile.transferTo(tempInputFile);
 
