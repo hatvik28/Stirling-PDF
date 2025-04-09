@@ -1,4 +1,4 @@
-package stirling.software.spdf.utils;
+package stirling.software.SPDF.utils;
 
 import io.github.pixee.security.ZipSecurity;
 import java.io.*;
