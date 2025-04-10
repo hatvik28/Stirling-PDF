@@ -65,7 +65,9 @@ public class FileToPdf {
       }
     } finally {
       Files.deleteIfExists(tempOutputFile);
-      Files.deleteIfExists(tempInputFile);
+      if (tempInputFile != null) {
+        Files.deleteIfExists(tempInputFile);
+      }
     }
 
     return pdfBytes;
