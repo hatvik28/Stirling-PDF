@@ -304,7 +304,10 @@ public class PDFToFile {
 
     } finally {
       // Clean up the temporary files
-      Files.deleteIfExists(tempInputFile);
+      if (tempInputFile != null) {
+        Files.deleteIfExists(tempInputFile);
+        log.debug("Deleted temporary input file: {}", tempInputFile);
+      }
       if (tempOutputDir != null) FileUtils.deleteDirectory(tempOutputDir.toFile());
     }
     return null;
