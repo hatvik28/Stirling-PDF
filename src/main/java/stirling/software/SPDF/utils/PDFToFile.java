@@ -274,11 +274,7 @@ public class PDFToFile {
                             .runCommandWithOutputHandling(command);
 
             // Get output files
-            File[] filesArray = tempOutputDir.toFile().listFiles();
-            if (filesArray == null) {
-                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            List<File> outputFiles = Arrays.asList(filesArray);
+            List<File> outputFiles = Arrays.asList(tempOutputDir.toFile().listFiles());
 
             if (outputFiles.size() == 1) {
                 // Return single output file
@@ -313,9 +309,7 @@ public class PDFToFile {
 
         } finally {
             // Clean up the temporary files
-            if (tempInputFile != null) {
-                Files.deleteIfExists(tempInputFile);
-            }
+            Files.deleteIfExists(tempInputFile);
             if (tempOutputDir != null) FileUtils.deleteDirectory(tempOutputDir.toFile());
         }
         return WebResponseUtils.bytesToWebResponse(
