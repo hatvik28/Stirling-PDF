@@ -90,7 +90,14 @@ public class FileToPdf {
             while (entry != null) {
                 Path filePath = tempUnzippedDir.resolve(sanitizeZipFilename(entry.getName()));
                 if (!entry.isDirectory()) {
-                    Files.createDirectories(filePath.getParent());
+                    Path parentDir = filePath.getParent();
+                    if (parentDir != null) {
+                        Files.createDirectories(parentDir);
+                    } else {
+                        System.err.println(
+                                "Warning: Parent directory is null for the entry: "
+                                        + entry.getName());
+                    }
                     if (entry.getName().toLowerCase().endsWith(".html")
                             || entry.getName().toLowerCase().endsWith(".htm")) {
                         String content = new String(zipIn.readAllBytes(), StandardCharsets.UTF_8);
@@ -179,9 +186,10 @@ public class FileToPdf {
                 throw new IOException("No HTML files found in the unzipped directory.");
             }
 
-            // Prioritize 'index.html' if it exists, otherwise use the first .html file
+            // Assign the return value to a local variable and check for null
             for (Path htmlFile : htmlFiles) {
-                if ("index.html".equals(htmlFile.getFileName().toString())) {
+                Path fileNamePath = htmlFile.getFileName();
+                if (fileNamePath != null && "index.html".equals(fileNamePath.toString())) {
                     return htmlFile;
                 }
             }
